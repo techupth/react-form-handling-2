@@ -1,7 +1,36 @@
+import { useState } from "react"
+
+
 function ProductForm() {
+  // state ค่าต่างๆ ที่จะเปลี่ยนได้
+  const [ name, setName ] = useState("");
+  const [ price, setPrice] = useState("");
+  const [ image, setImage] = useState("");
+  const [ description, setDescription] = useState("")
+
+  //handle เมื่อกดปุ่ม Create ใส่ event prevent default ให้จอไม่รีเฟรช 
+  const handleSubmit = (event) => {
+    event.preventDefault();
+  //สร้าง object เพื่อเอาข้อมูลจาก state มามัดรวมกัน
+
+  const allData = {
+    name: name,
+    price: Number(price),
+    image: image,
+    description: description
+  };
+
+  alert(JSON.stringify(allData, null, 2));
+
+  }
+
+
+
+
   return (
-    <form className="post-form">
+    <form className="post-form"  onSubmit={handleSubmit}>
       <h1>Create Product Form</h1>
+      {/* ช่อง Name: ใช้ State 'name' และฟังก์ชัน 'setName' */}
       <div className="input-container">
         <label>
           Name
@@ -10,10 +39,13 @@ function ProductForm() {
             name="name"
             type="text"
             placeholder="Enter name here"
-            onChange={() => {}}
+            value={name}
+            onChange={(event) => setName(event.target.value)}
           />
         </label>
       </div>
+
+      {/* ช่อง Image Url: ใช้ State 'image' และฟังก์ชัน 'setImage' */}
       <div className="input-container">
         <label>
           Image Url
@@ -22,10 +54,13 @@ function ProductForm() {
             name="image"
             type="text"
             placeholder="Enter image url here"
-            onChange={() => {}}
+            value={image}
+            onChange={(event) => setImage(event.target.value)}
           />
         </label>
       </div>
+
+      {/* ช่อง Price: ใช้ State 'price' และฟังก์ชัน 'setPrice' */}
       <div className="input-container">
         <label>
           Price
@@ -34,10 +69,12 @@ function ProductForm() {
             name="price"
             type="number"
             placeholder="Enter price here"
-            onChange={() => {}}
+            value={price}
+            onChange={(event) => setPrice(event.target.value)}
           />
         </label>
       </div>
+      {/* ช่อง Description: ใช้ State 'description' และฟังก์ชัน 'setDescription' */}
       <div className="input-container">
         <label>
           Description
@@ -46,7 +83,8 @@ function ProductForm() {
             name="description"
             type="text"
             placeholder="Enter description here"
-            onChange={() => {}}
+            value={description}
+            onChange={(event) => setDescription(event.target.value)}
             rows={4}
             cols={30}
           />
